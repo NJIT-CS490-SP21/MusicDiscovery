@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href={{ url_for('static', filename = 'style.css') }}/>
+    </head>
+  
+   <body>
+       <p>Mina's favorite shows are: </p>
+       <ol>
+           {%for i in range(0, len)%}
+           
+           {% if i == 0 %}
+               <li class="custom">{{fave_tv_shows[i]}}</li>
+            {% else %}
+            
+                <li>{{ fave_tv_shows[i]}}</li>
+            {%  endif %}
+           
+           {%endfor%}
+           
+           
+           
+       </ol>
+   </body>
+</html>
