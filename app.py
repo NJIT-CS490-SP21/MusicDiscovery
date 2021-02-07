@@ -1,5 +1,27 @@
 from flask import Flask, render_template
 import os
+import requests
+
+clientID = "bf8e821aeb774a3d9aaa3322b80d78ce"
+clientSecret = os.getenv('clientSecret')
+
+AUTH_URL = 'https://accounts.spotify.com/api/token'
+
+
+auth_response = requests.post(AUTH_URL, {
+    'grant_type': 'client_credentials',
+    'client_id': clientID,
+    'client_secret': clientSecret,
+})
+
+auth_response_data = auth_response.json()
+
+access_token = auth_response_data['access_token']
+
+headers = {
+    'Authorization': 'Bearer {token}'.format(token=access_token)
+}
+
 
 app = Flask(__name__)
 
