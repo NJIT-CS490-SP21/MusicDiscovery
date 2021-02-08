@@ -5,8 +5,18 @@
     </head>
   
    <body>
-       <p>{{ trackName }}</p>
-       <p>{{ trackArtist }}</p>
-       <img src={{ trackImage }} />
+       <p>{{topArtist}}'s Top 3 Tracks are: </p>
+       <ol>
+           {%for i in range(0, len)%}
+           
+           <li>{{ top3Tracks[i] }}</li>
+           <li><img src={{ top3ImgUrls[i] }} /></li>
+           <li href={{ top3ExtUrl[i] }}> {{ top3ExtUrl[i] }}</li>
+           
+           {%endfor%}
+           
+           
+           
+       </ol>
    </body>
 </html>

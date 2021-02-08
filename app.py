@@ -24,23 +24,18 @@ access_token = auth_response_data['access_token']
 headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
-artistIDs = ["5K4W6rqBFWDnAN6FQUkS6x", "2h93pZq0e7k5yf4dywlkpM", "1Mxqyy3pSjf8kZZL4QVxS0", "2YZyLoL8N0Wb9xBt1NhZWg", "1Xyo4u8uXC1ZmMpatF05PJ"]
 
+artistIDs = ["5K4W6rqBFWDnAN6FQUkS6x", "2h93pZq0e7k5yf4dywlkpM", "1Mxqyy3pSjf8kZZL4QVxS0", "2YZyLoL8N0Wb9xBt1NhZWg", "1Xyo4u8uXC1ZmMpatF05PJ"]
 randIndex = random.randrange(5)
 
 
 base_url = "https://api.spotify.com/v1/artists/"+ artistIDs[randIndex]+ "/top-tracks"
-
-
 market = "?market=US"
-
 base_url = base_url + market
 
 
 response = requests.get(base_url, headers=headers)
-
 response = response.json()
-
 response = response["tracks"]
 
 topTracks = []
@@ -75,9 +70,6 @@ def getTop3Tracks(response):
 getTop3Tracks(response)
 
 
-#TODO - make a list of artists
-#randomly select one to get their top songs
-# then have the first song info or all
 
 
 app = Flask(__name__)
@@ -90,8 +82,9 @@ def hello_world():
     return render_template(
         "index.html",
         top3Tracks = topTracks,
-        top3Artist = trackArtist,
-        top3ImgUrls = trackExternalUrls,
+        len = len(topTracks),
+        topArtist = trackArtist,
+        top3ImgUrls = trackImageUrls,
         top3ExtUrl = trackExternalUrls
     )
     
@@ -100,37 +93,3 @@ app.run(
     debug = True
     )
     
-    
-    
-    
-    
-    
-    
-# base_url = "https://api.spotify.com/v1/search"
-
-# #-------------------Requesting track info
-
-# q = "?q=i%20wonder"
-
-
-
-# typeOfContent = "&type=track"
-
-# base_url = base_url + q + typeOfContent
-
-# response = requests.get(base_url ,headers=headers)
-
-# response = response.json()
-
-# #-------------------Getting track info
-
-# #get track info
-# trackInfo = response["tracks"]["items"][0]
-
-# #get name of song
-# trackName = trackInfo["name"]
-
-# #name of artist of song
-# trackArtist = trackInfo["artists"][0]["name"]
-
-# trackImageUrl = trackInfo["album"]["images"][1]["url"]
