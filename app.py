@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import os
 import requests
 
+
 clientID = "bf8e821aeb774a3d9aaa3322b80d78ce"
 clientSecret = os.getenv('clientSecret')
 
@@ -18,9 +19,39 @@ auth_response_data = auth_response.json()
 
 access_token = auth_response_data['access_token']
 
+
 headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
+
+base_url = "https://api.spotify.com/v1/search"
+
+#-------------------Requesting track info
+
+q = "?q=i%20wonder"
+
+
+
+typeOfContent = "&type=track"
+
+base_url = base_url + q + typeOfContent
+
+response = requests.get(base_url ,headers=headers)
+
+response = response.json()
+
+#-------------------Getting track info
+
+#get track info
+trackInfo = response["tracks"]["items"][0]
+
+#get name of song
+trackName = trackInfo["name"]
+
+#name of artist of song
+trackArtist = trackInfo["artists"][0]["name"]
+
+trackImageUrl = trackInfo["album"]["images"][1]["url"]
 
 
 app = Flask(__name__)
@@ -32,8 +63,9 @@ def hello_world():
     # return ''
     return render_template(
         "index.html",
-        len = len(fave_tv_shows), 
-        fave_tv_shows = fave_tv_shows
+        trackImage = trackImageUrl,
+        trackArtist = trackArtist,
+        trackName = trackName
     )
     
 app.run(
