@@ -118,7 +118,7 @@ def hello_world():
     )
     
 app.run(
-    port = int(os.getenv('PORT', 8080)),
+    port = int(os.getenv('PORT', process.env.PORT)),
     debug = True
     )
     
