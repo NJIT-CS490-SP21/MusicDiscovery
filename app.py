@@ -5,7 +5,7 @@ import random
 
 
 clientID = "bf8e821aeb774a3d9aaa3322b80d78ce"
-clientSecret = os.getenv('clientSecret')
+clientSecret = os.getenv('clientSecret') #TODO store in heroku
 
 AUTH_URL = 'https://accounts.spotify.com/api/token'
 
@@ -69,6 +69,33 @@ def getTop3Tracks(response):
 
 getTop3Tracks(response)
 
+#authenticating with genuis 
+
+base_url = 'http://api.genius.com'
+lyrics_links = []
+
+#TODO store in heroku
+
+def getAllLyricLinks(songTitles):
+    for track in songTitles:
+        genuisToken=os.getenv('genuisToken')
+
+        headers = {'Authorization': 'Bearer {token}'.format(token=genuisToken)}
+        search_url = base_url + "/search"
+        song_title = track
+        params = {'q': song_title}
+        genuis_response = requests.get(search_url, params=params, headers=headers)
+
+        genuis_data = genuis_response.json()
+    
+        currentSongLyricUrl = genuis_data["response"]["hits"][0]["result"]["url"]
+    
+        lyrics_links.append(currentSongLyricUrl)
+
+    
+    
+getAllLyricLinks(topTracks)
+    
 
 
 
