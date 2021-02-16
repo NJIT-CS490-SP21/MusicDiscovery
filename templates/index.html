@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<link rel="stylesheet" href={{ url_for('static', filename = 'style.css') }}/>-->
+        <link rel="stylesheet" href={{ url_for('static', filename = 'style.css') }}/>
     </head>
   
-   <body>
-       <p>{{topArtist}}'s Top 3 Tracks are: </p>
-       <ol>
+   <body style="background-color:#1DB954">
+       <center><p style="font-size: 30px"><b>{{topArtist}}'s Top 3 Tracks are: </b></p></center>
+       <center><ol>
            {%for i in range(0, len)%}
            
-           <li>{{ top3Tracks[i] }}</li>
+           <li style="font-size: 20px">{{ top3Tracks[i] }}</li>
            <li><img src={{ top3ImgUrls[i] }} /></li>
-           <li> <a href={{ top3ExtUrl[i] }}> {{ top3ExtUrl[i] }} </a> </li>
+           <li> <a href={{ top3ExtUrl[i] }}> Open in Spotify</a> </li>
+           <li style="margin-bottom:25px"> <a href={{ lyric_urls[i] }}> Click here for the lyrics! </a> </li>
+
+           
            
            
            {%endfor%}
            
            
            
-       </ol>
+       </ol></center>
    </body>
 </html>

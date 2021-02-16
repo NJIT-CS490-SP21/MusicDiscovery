@@ -112,7 +112,8 @@ def hello_world():
         len = len(topTracks),
         topArtist = trackArtist,
         top3ImgUrls = trackImageUrls,
-        top3ExtUrl = trackExternalUrls
+        top3ExtUrl = trackExternalUrls,
+        lyric_urls = lyrics_links
     )
     
 app.run(
