@@ -5,7 +5,7 @@ import random
 
 
 clientID = "bf8e821aeb774a3d9aaa3322b80d78ce"
-clientSecret = "83e248c969fd40a5b4b11249b23df91c" #TODO store in heroku
+clientSecret = os.getenv('clientSecret') #TODO store in heroku
 
 AUTH_URL = 'https://accounts.spotify.com/api/token'
 
