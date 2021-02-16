@@ -79,7 +79,7 @@ lyrics_links = []
 
 def getAllLyricLinks(songTitles):
     for track in songTitles:
-        genuisToken=os.getenv('genuisToken')
+        genuisToken=os.getenv('')
 
         headers = {'Authorization': 'Bearer {token}'.format(token=genuisToken)}
         search_url = base_url + "/search"
